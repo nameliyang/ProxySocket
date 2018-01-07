@@ -1,0 +1,21 @@
+#main {
+    max-width: 600px;
+    margin: 0 auto;
+    height: 600px;
+    background: #0EC879;
+    padding:10px;
+}
+
+li{
+    list-style: none;
+    clear:both;
+    padding:10px;
+}
+
+.in{
+    float:left;
+}
+
+.out{
+    float:right;
+}

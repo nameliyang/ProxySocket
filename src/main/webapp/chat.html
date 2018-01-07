@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var ws ;
+    window.onload= function(){
+            open();
+    }
+    function open(){
+        if ("WebSocket" in window) {
+            ws = new WebSocket("ws://localhost/echo");
+            ws.onopen = function () {
+                append("message on open...")
+            };
+
+            ws.onmessage = function (evt) {
+                append("return:"+ evt.data);
+            };
+
+            ws.onclose = function (v,e) {
+                console.log("------------------->close code :"+v.code);
+                alert("code code;"+v.code);
+                setTimeout(open, 1000);
+            };
+        }
+    }
+
+    function append( msg){
+        var resultDiv  = document.getElementById("result");
+        var msg_p = document.createElement("p");
+        msg_p.setAttribute("style","margin:2px;");
+        msg_p.innerText= msg;
+        resultDiv.appendChild(msg_p);
+    }
+
+    function send(){
+        var msg = document.getElementById("msg").value;
+        if(msg == ''){
+            ws.close();
+            return;
+        }
+        append("send msg:"+msg)
+        ws.send(msg);
+    }
+    function  clearMsg() {
+        var resultDiv  = document.getElementById("result");
+        var pnodes =  resultDiv.getElementsByTagName("p");
+        for(var i = pnodes.length-1;i>=0;i--){
+            resultDiv.removeChild(pnodes[i]);
+        }
+    }
+</script>
+</body>
+  <div style="width:800px;height:30px;text-align:center;">
+      <textarea id="msg" style="float:left;width:500px;"></textarea>
+      <button onclick="send()"  style="display: block;float:left;position: relative;top:0%;left:10px;" >SEND</button>
+      <button onclick=" clearMsg();" style="display: block;float:left;position: relative;top:0%;left:20px" >CLEAR</button>
+  </div>
+
+  <div id="result" style="width:auto; height: 400px;background: #0EC879;overflow-y:scroll;clear:both;">
+  </div>
+</div>
+</html>

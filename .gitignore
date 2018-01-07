@@ -5,5 +5,5 @@
 .project
 .settings/
 WebSockets.iml
-src/
 target/
+pom.xml
