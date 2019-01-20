@@ -12,6 +12,16 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.33.Final</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>
