@@ -9,12 +9,23 @@ import java.nio.channels.FileChannel;
 public class FileChannelTest {
     public static void main(String[] args) throws IOException {
 
-        RandomAccessFile randomAccessFile = new RandomAccessFile(new File(""), "rw");
+        RandomAccessFile randomAccessFile = new RandomAccessFile(new File("E:\\dream\\ProxySocket\\src\\main\\java\\com\\ly\\SayHello.java"), "rw");
         FileChannel fileChannel = randomAccessFile.getChannel();
+
         ByteBuffer byteBuffer = ByteBuffer.allocate(100);
 
-        fileChannel.read(byteBuffer);
-
+       while( fileChannel.read(byteBuffer) >= 0 ){
+            readBytes(byteBuffer);
+            byteBuffer.compact();
+        }
+        fileChannel.close();
     }
 
+
+    public static void  readBytes(ByteBuffer byteBuffer){
+        byteBuffer.flip();
+        while(byteBuffer.hasRemaining()){
+            System.out.print((char)byteBuffer.get());
+        }
+    }
 }

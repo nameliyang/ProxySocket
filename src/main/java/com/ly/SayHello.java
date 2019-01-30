@@ -19,6 +19,11 @@ public class SayHello {
 
    private static final  ExecutorService SERVER = Executors.newCachedThreadPool();
 
+    /**
+     * 这是一个测试
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8989);
 
