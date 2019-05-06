@@ -14,7 +14,6 @@ import java.util.concurrent.Executors;
  * @Date: 2019/1/18 18:45
  */
 @SuppressWarnings("all")
-
 public class SayHello {
 
    private static final  ExecutorService SERVER = Executors.newCachedThreadPool();
@@ -29,6 +28,7 @@ public class SayHello {
 
         Socket accept = serverSocket.accept();
         System.out.println("start --------------------------->");
+
         SERVER.submit(()->{
             try {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(accept.getInputStream()));

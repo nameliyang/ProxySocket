@@ -15,7 +15,6 @@ public class EventHandler {
 
     ByteBuffer byteBuffer = ByteBuffer.allocate(10);
 
-
     private static final String END_TOKEN = "\r\n";
 
 
@@ -32,6 +31,7 @@ public class EventHandler {
         while(socketChannel.read(byteBuffer)>0){
             byteBuffer.flip();
         }
+
     }
 
     public void onWriteEvent(){

@@ -22,13 +22,13 @@ public class EchoServer {
     }
 
     public void run() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
-            ServerBootstrap b = new ServerBootstrap(); // (2)
+            ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class) // (3)
-                    .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
+                    .channel(NioServerSocketChannel.class)
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch)  {
                             ch.pipeline().addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
@@ -37,11 +37,11 @@ public class EchoServer {
                             ch.pipeline().addLast(new EchoServerHandler());
                         }
                     })
-                    .option(ChannelOption.SO_BACKLOG, 128)          // (5)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true);
 
             // 绑定端口，开始接收进来的连接
-            ChannelFuture f = b.bind(port).sync(); // (7)
+            ChannelFuture f = b.bind(port).sync();
 
             System.out.println("Server start listen at " + port );
             // 等待服务器  socket 关闭 。
